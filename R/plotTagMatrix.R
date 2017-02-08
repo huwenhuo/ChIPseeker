@@ -260,7 +260,7 @@ plotAvgProf.internal <- function(tagMatrix, conf,
                                  xlim = c(-3000,3000),
                                  xlab = "Genomic Region (5'->3')",
                                  ylab = "Read Count Frequency",
-                                 facet="none", free_y = TRUE, ...) {
+                                 facet="none", free_y = TRUE, ymax=NULL, ...) {
 
     listFlag <- FALSE
     if (is(tagMatrix, "list")) {
@@ -293,6 +293,8 @@ plotAvgProf.internal <- function(tagMatrix, conf,
     
     pos <- value <- .id <- Lower <- Upper <- NULL
     
+    if(!is.null(ymax)) {Upper = ymax}
+      
     if ( listFlag ) {
         tagCount <- lapply(tagMatrix, function(x) getTagCount(x, xlim = xlim, conf = conf, ...))
         tagCount <- list_to_dataframe(tagCount)
